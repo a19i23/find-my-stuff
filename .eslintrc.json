@@ -1,0 +1,15 @@
+{
+// "extends": "next/core-web-vitals" //strict version
+"extends": ["next","plugin:prettier/recommended"],
+"plugins": ["prettier"],
+"rules": {
+    "prettier/prettier": "error",
+    "react/self-closing-comp": [
+        "error",
+        {
+            "component": true,
+            "html": true
+        }
+    ]
+}
+}
