@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../util/mongodb";
+import { connectToDatabase } from '../util/mongodb';
 
 export default function Movies({ movies }) {
   return (
@@ -9,7 +9,7 @@ export default function Movies({ movies }) {
       </p>
       <ul>
         {movies.map((movie) => (
-          <li>
+          <li key={movie.id}>
             <h2>{movie.title}</h2>
             <h3>{movie.metacritic}</h3>
             <p>{movie.plot}</p>
@@ -24,7 +24,7 @@ export async function getServerSideProps() {
   const { db } = await connectToDatabase();
 
   const movies = await db
-    .collection("movies")
+    .collection('movies')
     .find({})
     .sort({ metacritic: -1 })
     .limit(20)
