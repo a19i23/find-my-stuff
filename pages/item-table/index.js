@@ -45,8 +45,8 @@ export default function ItemTable({ items }) {
   return (
     <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+        {headerGroups.map((headerGroup) => ({
+          /* <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
               <th
                 {...column.getHeaderProps()}
@@ -60,14 +60,14 @@ export default function ItemTable({ items }) {
                 {column.render('Header')}
               </th>
             ))}
-          </tr>
-        ))}
+          </tr> */
+        }))}
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
+          return {
+            /* <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 return (
                   <td
@@ -82,8 +82,8 @@ export default function ItemTable({ items }) {
                   </td>
                 );
               })}
-            </tr>
-          );
+            </tr> */
+          };
         })}
       </tbody>
     </table>
