@@ -11,9 +11,9 @@ export default function Items({ items }) {
       <div className="flex justify-center items-center">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow-md overflow-hidden border-b border-gray-200 dark:border-gray-800 sm:rounded-lg">
+            <div className="shadow-md h-96 overflow-y-scroll overflow-hidden border-b border-gray-200 dark:border-gray-800 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                <thead className="bg-gray-50 dark:bg-gray-500">
+                <thead className="sticky top-0 bg-gray-50 dark:bg-gray-500">
                   <tr>
                     <th
                       scope="col"
