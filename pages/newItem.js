@@ -11,9 +11,9 @@ export default function NewItem() {
     message: '',
   });
 
-  const [itemName, setItemName] = useState();
+  const [itemName, setItemName] = useState('');
   const [itemLocation, setItemLocation] = useState();
-  const [itemBoxNumber, setItemBoxNumber] = useState();
+  const [itemBoxNumber, setItemBoxNumber] = useState('');
 
   async function handleSubmit(e) {
     setOpen(true);
@@ -38,7 +38,7 @@ export default function NewItem() {
     let severity, message;
     if (data) {
       setItemName('');
-      setItemLocation('Wall (Back)');
+      setItemLocation('');
       setItemBoxNumber('');
       setOpen(false);
       severity = 'success';
@@ -86,6 +86,7 @@ export default function NewItem() {
                         Item name
                       </label>
                       <input
+                        required
                         type="text"
                         name="itemName"
                         id="itemName"
@@ -103,13 +104,18 @@ export default function NewItem() {
                         Item location
                       </label>
                       <select
+                        required
                         type="text"
                         name="itemLocation"
                         id="itemLocation"
+                        defaultValue=""
                         value={itemLocation}
                         onChange={(e) => setItemLocation(e.target.value)}
                         className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
+                        <option value="" disabled hidden>
+                          Select Location
+                        </option>
                         <option>Wall (Back)</option>
                         <option>Wall (Middle)</option>
                         <option>Wall (Front)</option>
@@ -128,7 +134,8 @@ export default function NewItem() {
                         Box number
                       </label>
                       <input
-                        type="text"
+                        required
+                        type="number"
                         name="boxNum"
                         id="boxNum"
                         value={itemBoxNumber}
