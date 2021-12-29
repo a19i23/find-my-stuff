@@ -1,5 +1,22 @@
-export default function Movies() {
+import React, { useState } from 'react';
+import CustomizedSnackbar from '../components/CustomizedSnackbar';
+import Rocket from '../components/Rocket';
+import RocketLoading from '../components/RocketLoading';
+
+export default function NewItem() {
+  const [open, setOpen] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    severity: '',
+    message: '',
+  });
+
+  const [itemName, setItemName] = useState();
+  const [itemLocation, setItemLocation] = useState();
+  const [itemBoxNumber, setItemBoxNumber] = useState();
+
   async function handleSubmit(e) {
+    setOpen(true);
     e.preventDefault();
     const date = new Date();
 
@@ -18,14 +35,33 @@ export default function Movies() {
       },
     });
     const data = await response.json();
+    let severity, message;
+    if (data) {
+      setItemName('');
+      setItemLocation('Wall (Back)');
+      setItemBoxNumber('');
+      setOpen(false);
+      severity = 'success';
+      message = `${itemName} added to inventory`;
+    } else {
+      severity = 'error';
+      message = `${itemName} not added. ${data.message}`;
+    }
+    setSnackbar((prev) => {
+      return {
+        open: true,
+        severity,
+        message,
+      };
+    });
   }
 
   return (
     <div
-      className="flex justify-center items-center bg-white dark:bg-gray-900"
+      className="flex justify-center bg-white dark:bg-gray-900 "
       style={{ height: '100vh' }}
     >
-      <div className="mt-10 mx-4 sm:mt-4 sm:mx-10">
+      <div className="mt-10 mx-4 sm:mt-40 sm:mx-10">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -53,6 +89,8 @@ export default function Movies() {
                         type="text"
                         name="itemName"
                         id="itemName"
+                        value={itemName}
+                        onChange={(e) => setItemName(e.target.value)}
                         className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -68,6 +106,8 @@ export default function Movies() {
                         type="text"
                         name="itemLocation"
                         id="itemLocation"
+                        value={itemLocation}
+                        onChange={(e) => setItemLocation(e.target.value)}
                         className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       >
                         <option>Wall (Back)</option>
@@ -91,6 +131,8 @@ export default function Movies() {
                         type="text"
                         name="boxNum"
                         id="boxNum"
+                        value={itemBoxNumber}
+                        onChange={(e) => setItemBoxNumber(e.target.value)}
                         className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -109,6 +151,8 @@ export default function Movies() {
           </div>
         </div>
       </div>
+      <RocketLoading open={open} setOpen={setOpen} />
+      <CustomizedSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
     </div>
   );
 }

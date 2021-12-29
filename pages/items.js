@@ -4,13 +4,12 @@ import moment from 'moment';
 export default function Items({ items }) {
   return (
     <div className="bg-white dark:bg-gray-900" style={{ height: '100vh' }}>
-      <div className="text-gray-900 dark:text-white font-bold text-xl px-8 pt-8 pb-2">
-        My Items
-      </div>
-
       <div className="flex justify-center items-center">
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div className="overflow-x-auto mt-10 mx-4 sm:mx-10">
+          <div className="align-middle inline-block min-w-full ">
+            <div className="text-gray-900 dark:text-white font-bold text-xl px-8 pt-8 pb-2">
+              My Items
+            </div>
             <div className="shadow-md h-96 overflow-y-scroll overflow-hidden border-b border-gray-200 dark:border-gray-800 sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
                 <thead className="sticky top-0 bg-gray-50 dark:bg-gray-500">
