@@ -15,6 +15,14 @@ export default function NewItem() {
   const [itemLocation, setItemLocation] = useState();
   const [itemBoxNumber, setItemBoxNumber] = useState('');
 
+  function delay(delayInms) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(2);
+      }, delayInms);
+    });
+  }
+
   async function handleSubmit(e) {
     setOpen(true);
     e.preventDefault();
@@ -35,6 +43,8 @@ export default function NewItem() {
       },
     });
     const data = await response.json();
+    await delay(2000);
+
     let severity, message;
     if (data) {
       setItemName('');
