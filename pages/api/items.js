@@ -1,6 +1,6 @@
 import { connectToDatabase } from '../../util/mongodb';
 
-export default async (req, res) => {
+const items = async (req, res) => {
   const { db } = await connectToDatabase();
 
   const items = await db
@@ -11,3 +11,4 @@ export default async (req, res) => {
 
   res.json(items);
 };
+export default items;
