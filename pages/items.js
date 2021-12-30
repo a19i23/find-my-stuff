@@ -24,7 +24,7 @@ export default function Items({ items }) {
       <div className="flex justify-center items-center">
         <div className="overflow-x-auto mt-10 mx-4 sm:mx-10">
           <div className="align-middle inline-block min-w-full ">
-            <div className="flex justify-between items-baseline">
+            <div className="flex flex-col sm:flex-row justify-between items-baseline ">
               <div className="text-gray-900 dark:text-white font-bold text-xl px-8 pt-8 pb-2">
                 My Items
               </div>
@@ -34,11 +34,11 @@ export default function Items({ items }) {
                 id="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="h-6 px-1 mr-1 bg-white dark:bg-gray-500 text-gray-900 dark:text-gray-300 outline-none rounded-md"
+                className="h-6 px-2 mr-1 bg-white dark:bg-gray-500 text-gray-900 dark:text-gray-200 outline-none rounded-md mb-2"
                 placeholder="Search..."
               />
             </div>
-            <div className="shadow-md h-96 overflow-y-scroll overflow-hidden border-b border-gray-200 dark:border-gray-800 sm:rounded-lg">
+            <div className="shadow-md h-96 overflow-y-scroll overflow-hidden border-b border-gray-200 dark:border-gray-800 rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
                 <thead className="sticky top-0 bg-gray-50 dark:bg-gray-500">
                   <tr>
