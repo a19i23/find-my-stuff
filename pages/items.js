@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connectToDatabase } from '../util/mongodb';
 import moment from 'moment';
+import Paper from '@mui/material/Paper';
 
 export default function Items({ items }) {
   const [search, setSearch] = useState('');
@@ -24,8 +25,8 @@ export default function Items({ items }) {
       <div className="flex justify-center items-center">
         <div className="overflow-x-auto mt-10 mx-4 sm:mx-10">
           <div className="align-middle inline-block min-w-full ">
-            <div className="flex flex-col sm:flex-row justify-between items-baseline ">
-              <div className="text-gray-900 dark:text-white font-bold text-xl px-8 pt-8 pb-2">
+            <div className="flex flex-col items-start">
+              <div className="text-gray-900 dark:text-white font-bold text-xl mx-4 mt-8 mb-1">
                 My Items
               </div>
               <input
@@ -34,13 +35,13 @@ export default function Items({ items }) {
                 id="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="h-6 px-2 mr-1 bg-white dark:bg-gray-500 text-gray-900 dark:text-gray-200 outline-none rounded-md mb-2"
-                placeholder="Search..."
+                className="h-6 px-2 ml-4 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 outline-none border-2 dark:border-gray-700 rounded-md mb-2"
+                placeholder="Search"
               />
             </div>
             <div className="shadow-md h-96 overflow-y-scroll overflow-hidden border-b border-gray-200 dark:border-gray-800 rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                <thead className="sticky top-0 bg-gray-50 dark:bg-gray-500">
+              <table className="min-w-full table-fixed">
+                <thead className="sticky top-0 bg-gray-50 dark:bg-gray-900">
                   <tr>
                     <th
                       scope="col"
@@ -68,20 +69,20 @@ export default function Items({ items }) {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-600">
+                {/* <tbody className="bg-white divide-y-8 divide-gray-200 dark:bg-gray-800 dark:divide-gray-900"> */}
+                <tbody className=" divide-y-8 divide-gray-900 ">
                   {tableItems?.map((item) => {
                     const dbDate = item.lastUpdated;
                     const formattedDate = moment(dbDate).format('MMMM Do YYYY');
                     const formattedTime = moment(dbDate).format('h:mm:ss a');
 
                     return (
-                      <tr key={item._id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                      <tr key={item._id} className="rounded-lg bg-gray-700">
+                        {/* <div className="flex items-center rounded-lg bg-gray-700"> */}
+                        <td className="px-6">
                           <div className="flex items-center">
-                            <div className="ml-4">
-                              <div className="w-52 whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200 ">
-                                {item.name}
-                              </div>
+                            <div className="w-52 whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200">
+                              {item.name}
                             </div>
                           </div>
                         </td>
@@ -103,6 +104,7 @@ export default function Items({ items }) {
                             {formattedTime}
                           </div>
                         </td>
+                        {/* </div> */}
                       </tr>
                     );
                   })}
