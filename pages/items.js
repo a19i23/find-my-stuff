@@ -23,7 +23,7 @@ export default function Items({ items }) {
   return (
     <div className="bg-white dark:bg-gray-900" style={{ height: '100vh' }}>
       <div className="flex justify-center items-center">
-        <div className="overflow-x-auto mt-10 mx-4 sm:mx-10">
+        <div className="overflow-x-scroll scrollbar mt-10 mx-4 sm:mx-10">
           <div className="align-middle inline-block min-w-full ">
             <div className="flex flex-col items-start">
               <div className="text-gray-900 dark:text-white font-bold text-xl mx-4 mt-8 mb-1">
