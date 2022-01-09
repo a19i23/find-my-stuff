@@ -155,7 +155,6 @@ export default function NewItem() {
                         Box number
                       </label>
                       <input
-                        required
                         type="number"
                         name="boxNum"
                         id="boxNum"
