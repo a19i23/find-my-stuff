@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import CustomizedSnackbar from '../components/CustomizedSnackbar';
 import Rocket from '../components/Rocket';
 import RocketLoading from '../components/RocketLoading';
+import useSWR from 'swr';
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function NewItem() {
+  const { data: lastBoxNum, error } = useSWR('/api/latestBoxNumber', fetcher);
   const [open, setOpen] = useState(false);
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -21,6 +25,11 @@ export default function NewItem() {
         resolve(2);
       }, delayInms);
     });
+  }
+
+  function handleNewBox(e) {
+    if (e.target.checked) setItemBoxNumber(lastBoxNum + 1);
+    else setItemBoxNumber('');
   }
 
   async function handleSubmit(e) {
@@ -50,6 +59,8 @@ export default function NewItem() {
       setItemName('');
       setItemLocation('');
       setItemBoxNumber('');
+      document.getElementById('newBox').checked = false;
+
       setOpen(false);
       severity = 'success';
       message = `${itemName} added to inventory`;
@@ -88,7 +99,7 @@ export default function NewItem() {
               <div className="shadow overflow-hidden rounded-md">
                 <div className="px-4 py-5 bg-white dark:bg-gray-700 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
-                    <div className="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-5">
                       <label
                         htmlFor="itemName"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -136,7 +147,7 @@ export default function NewItem() {
                       </select>
                     </div>
 
-                    <div className="col-span-6 sm:col-span-2">
+                    <div className="col-span-3">
                       <label
                         htmlFor="boxNum"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -151,6 +162,23 @@ export default function NewItem() {
                         value={itemBoxNumber}
                         onChange={(e) => setItemBoxNumber(e.target.value)}
                         className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+
+                    <div className="items-center col-start-5 col-span-2">
+                      <label
+                        htmlFor="newBox"
+                        className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+                      >
+                        New box?
+                      </label>
+                      <input
+                        required
+                        type="checkbox"
+                        name="newBox"
+                        id="newBox"
+                        onChange={handleNewBox}
+                        className="mt-4 ml-6 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
                       />
                     </div>
                   </div>
