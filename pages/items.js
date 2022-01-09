@@ -39,7 +39,7 @@ export default function Items({ items }) {
                 placeholder="Search"
               />
             </div>
-            <div className="h-96 overflow-y-scroll scrollbar overflow-hidden border rounded-lg border-gray-200 dark:border-gray-800">
+            <div className="h-96 overflow-y-auto scrollbar overflow-hidden border rounded-lg border-gray-200 dark:border-gray-800">
               <table className="min-w-full table-fixed">
                 <thead className="sticky top-0 bg-white dark:bg-gray-900">
                   <tr>
@@ -69,48 +69,59 @@ export default function Items({ items }) {
                     </th>
                   </tr>
                 </thead>
-                {/* <tbody className="bg-white divide-y-8 divide-gray-200 dark:bg-gray-800 dark:divide-gray-900"> */}
-                <tbody className=" divide-y-8 divide-white dark:divide-gray-900 ">
-                  {tableItems?.map((item) => {
-                    const dbDate = item.lastUpdated;
-                    const formattedDate = moment(dbDate).format('MMMM Do YYYY');
-                    const formattedTime = moment(dbDate).format('h:mm:ss a');
+                <tbody className="divide-y-8 divide-white dark:divide-gray-900 ">
+                  {tableItems?.length > 0 ? (
+                    tableItems?.map((item) => {
+                      const dbDate = item.lastUpdated;
+                      const formattedDate =
+                        moment(dbDate).format('MMMM Do YYYY');
+                      const formattedTime = moment(dbDate).format('h:mm:ss a');
 
-                    return (
-                      <tr
-                        key={item._id}
-                        className="rounded-lg bg-gray-200 dark:bg-gray-700"
-                      >
-                        {/* <div className="flex items-center rounded-lg bg-gray-700"> */}
-                        <td className="px-6">
-                          <div className="flex items-center">
-                            <div className="whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200">
-                              {item.name}
+                      return (
+                        <tr
+                          key={item._id}
+                          className="rounded-lg bg-gray-200 dark:bg-gray-700"
+                        >
+                          <td className="px-6">
+                            <div className="flex items-center">
+                              <div className="whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200">
+                                {item.name}
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900 dark:text-gray-400">
-                            {item.location}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900 dark:text-gray-400">
-                            {item.boxNumber}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
-                          <div className="text-sm text-gray dark:text-gray-400">
-                            {formattedDate}
-                          </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
-                            {formattedTime}
-                          </div>
-                        </td>
-                        {/* </div> */}
-                      </tr>
-                    );
-                  })}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 dark:text-gray-400">
+                              {item.location}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900 dark:text-gray-400">
+                              {item.boxNumber}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-white">
+                            <div className="text-sm text-gray dark:text-gray-400">
+                              {formattedDate}
+                            </div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                              {formattedTime}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr className="min-w-full bg-gray-200 dark:bg-gray-700">
+                      <td className="px-6 py-6 ">
+                        <div className="text-gray-900 dark:text-gray-200">
+                          No results found...
+                        </div>
+                      </td>
+                      <td />
+                      <td />
+                      <td />
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
