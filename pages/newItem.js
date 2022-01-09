@@ -172,7 +172,6 @@ export default function NewItem() {
                         New box?
                       </label>
                       <input
-                        required
                         type="checkbox"
                         name="newBox"
                         id="newBox"
