@@ -20,10 +20,14 @@ export default function LoginBar() {
           >
             findMyStuff
           </Typography>
-          <Button className="font-light" href="/api/login" color="inherit">
+          <Button className="font-light" href="/api/auth/login" color="inherit">
             Login
           </Button>
-          <Button className="font-light" href="/api/logout" color="inherit">
+          <Button
+            className="font-light"
+            href="/api/auth/logout"
+            color="inherit"
+          >
             Logout
           </Button>
         </Toolbar>
