@@ -4,7 +4,6 @@ import Header from './header';
 function Layout({ user, loading = false, children }) {
   if (process.browser) {
     const currentTheme = document.documentElement.dataset.theme;
-    console.log(currentTheme);
 
     if (currentTheme === 'dark') {
       window.document.documentElement.dataset.theme = 'light';

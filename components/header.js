@@ -5,36 +5,41 @@ function Header({ user, loading }) {
     <header>
       <nav>
         <ul>
-          <li>
+          {/* <li>
             <Link href="/">
               <a>Home</a>
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link href="/about">
               <a>About</a>
             </Link>
-          </li>
+          </li> */}
           {!loading &&
             (user ? (
               <>
-                <li>
+                {/* <li>
                   <Link href="/profile">
                     <a>Client-rendered profile</a>
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/items">
-                    <a>Server rendered profile (advanced)</a>
+                    <a>Items</a>
                   </Link>
                 </li>
                 <li>
-                  <a href="/api/logout">Logout</a>
+                  <Link href="/newItem">
+                    <a>Create</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/api/logout">Logout</Link>
                 </li>
               </>
             ) : (
               <li>
-                <a href="/api/login">Login</a>
+                <Link href="/api/login">Login</Link>
               </li>
             ))}
         </ul>
