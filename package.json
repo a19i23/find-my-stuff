@@ -7,9 +7,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.7.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.6",
+    "@mui/icons-material": "^5.4.1",
+    "@mui/material": "^5.4.1",
     "lottie-web": "^5.8.1",
     "moment": "^2.29.1",
     "mongodb": "^4.1.3",
