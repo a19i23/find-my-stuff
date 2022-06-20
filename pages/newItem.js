@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import CustomizedSnackbar from '../components/CustomizedSnackbar';
 import Rocket from '../components/Rocket';
 import RocketLoading from '../components/RocketLoading';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import Layout from '../components/layout';
 import auth0 from '../lib/auth0';
+import { downeyGarage } from './locations';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -18,14 +19,15 @@ export default function NewItem({ user }) {
   });
 
   const [itemName, setItemName] = useState('');
-  const [itemLocation, setItemLocation] = useState();
-  const [itemBoxNumber, setItemBoxNumber] = useState('');
+  const [itemArea, setItemArea] = useState('');
+  const [itemLevel, setItemLevel] = useState('');
+  const [itemBoxNumber, setItemBoxNumber] = useState(false);
 
-  function delay(delayInms) {
+  function delay(delayInMS) {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(2);
-      }, delayInms);
+      }, delayInMS);
     });
   }
 
@@ -39,12 +41,15 @@ export default function NewItem({ user }) {
     e.preventDefault();
     const date = new Date();
 
+    const { itemName, itemArea, itemLevel, boxNum } = e.target;
     const item = {
-      name: e.target.itemName.value,
-      location: e.target.itemLocation.value,
-      boxNumber: e.target.boxNum.value,
+      name: itemName.value,
       lastUpdated: date,
     };
+
+    if (itemArea) item.itemArea = itemArea.value;
+    if (itemLevel) item.itemLevel = itemLevel.value;
+    if (boxNum) item.boxNumber = parseInt(boxNum.value);
 
     const response = await fetch('/api/newItem', {
       method: 'POST',
@@ -59,16 +64,18 @@ export default function NewItem({ user }) {
     let severity, message;
     if (data) {
       setItemName('');
-      setItemLocation('');
+      setItemArea('');
+      setItemLevel('');
       setItemBoxNumber('');
       document.getElementById('newBox').checked = false;
+      mutate('/api/latestBoxNumber');
 
       setOpen(false);
       severity = 'success';
-      message = `${itemName} added to inventory`;
+      message = `${data.name} added to inventory`;
     } else {
       severity = 'error';
-      message = `${itemName} not added. ${data.message}`;
+      message = `${data.name} not added. ${data.message}`;
     }
     setSnackbar((prev) => {
       return {
@@ -120,33 +127,51 @@ export default function NewItem({ user }) {
                         />
                       </div>
 
-                      <div className="col-span-6 sm:col-span-6">
+                      <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor="itemLocation"
+                          htmlFor="itemArea"
                           className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                         >
-                          Item location
+                          Item Area
                         </label>
                         <select
-                          required
                           type="text"
-                          name="itemLocation"
-                          id="itemLocation"
-                          defaultValue=""
-                          value={itemLocation}
-                          onChange={(e) => setItemLocation(e.target.value)}
+                          name="itemArea"
+                          id="itemArea"
+                          value={itemArea}
+                          onChange={(e) => setItemArea(e.target.value)}
                           className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         >
                           <option value="" disabled hidden>
-                            Select Location
+                            Select Area
                           </option>
-                          <option>Wall (Back)</option>
-                          <option>Wall (Middle)</option>
-                          <option>Wall (Front)</option>
-                          <option>TV Stand (Bottom)</option>
-                          <option>TV Stand (Top)</option>
-                          <option>Bookcase</option>
-                          <option>Center (Front)</option>
+                          {downeyGarage.areas.map((area) => (
+                            <option key={area}>{area}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3">
+                        <label
+                          htmlFor="itemLevel"
+                          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+                        >
+                          Item Level
+                        </label>
+                        <select
+                          type="text"
+                          name="itemLevel"
+                          id="itemLevel"
+                          value={itemLevel}
+                          onChange={(e) => setItemLevel(e.target.value)}
+                          className="mt-1 py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        >
+                          <option value="" disabled hidden>
+                            Select Level
+                          </option>
+                          {downeyGarage.levels.map((level) => (
+                            <option key={level}>{level}</option>
+                          ))}
                         </select>
                       </div>
 
@@ -158,6 +183,7 @@ export default function NewItem({ user }) {
                           Box number
                         </label>
                         <input
+                          required
                           type="number"
                           name="boxNum"
                           id="boxNum"
