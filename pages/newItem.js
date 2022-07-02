@@ -88,10 +88,7 @@ export default function NewItem({ user }) {
 
   return (
     <Layout user={user}>
-      <div
-        className="flex justify-center bg-white dark:bg-gray-900 "
-        style={{ height: '100vh' }}
-      >
+      <div className="flex justify-center bg-white dark:bg-gray-900 ">
         <div className="mt-2 mx-4 sm:mt-10 sm:mx-10">
           <div className="md:grid md:grid-cols-3 md:gap-6">
             <div className="md:col-span-1">

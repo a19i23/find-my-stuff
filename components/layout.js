@@ -14,13 +14,13 @@ function Layout({ user, loading = false, children }) {
   return (
     <>
       <Head>
-        <title>Next.js with Auth0</title>
+        <title>Find My Stuff</title>
       </Head>
 
       <Header user={user} loading={loading} />
 
-      <main className="bg-white dark:bg-gray-900">
-        <div className="max-w-2xl py-6 mx-auto">{children}</div>
+      <main className="bg-white dark:bg-gray-900 flex flex-col h-full">
+        <div className="max-w-2xl py-12 mx-auto">{children}</div>
       </main>
 
       <style jsx>{`

@@ -4,6 +4,7 @@ import moment from 'moment';
 import Paper from '@mui/material/Paper';
 import Layout from '../components/layout';
 import auth0 from '../lib/auth0';
+import Link from 'next/link';
 
 export default function Items({ items, user }) {
   const [search, setSearch] = useState('');
@@ -24,7 +25,7 @@ export default function Items({ items, user }) {
 
   return (
     <Layout user={user}>
-      <div className="bg-white dark:bg-gray-900" style={{ height: '100vh' }}>
+      <div className="bg-white dark:bg-gray-900">
         <div className="flex justify-center items-center">
           <div className="overflow-x-scroll scrollbar">
             <div className="align-middle inline-block min-w-full ">
@@ -56,7 +57,13 @@ export default function Items({ items, user }) {
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider"
                       >
-                        Location
+                        Area
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-white uppercase tracking-wider"
+                      >
+                        Level
                       </th>
                       <th
                         scope="col"
@@ -89,13 +96,22 @@ export default function Items({ items, user }) {
                             <td className="px-6">
                               <div className="flex items-center">
                                 <div className="whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200">
-                                  {item.name}
+                                  <Link href={`/item/${item._id}`}>
+                                    <a className="hover:underline">
+                                      {item.name}
+                                    </a>
+                                  </Link>
                                 </div>
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="text-sm text-gray-900 dark:text-gray-400">
-                                {item.location}
+                                {item.itemArea}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm text-gray-900 dark:text-gray-400">
+                                {item.itemLevel}
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
