@@ -16,7 +16,6 @@ const Item = ({ item, user }) => {
     message: '',
   });
 
-  console.log(item);
   return (
     <Layout user={user}>
       <div className="flex justify-center bg-white dark:bg-gray-900 ">

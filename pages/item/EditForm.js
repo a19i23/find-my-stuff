@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
-import { downeyGarage } from '../locations';
+import { downeyGarage } from '../../util/locations';
 
 const EditForm = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
   const [currentItem, setCurrentItem] = React.useState(item);
@@ -50,7 +50,7 @@ const EditForm = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
                 type="text"
                 name="itemName"
                 id="itemName"
-                value={currentItem.name}
+                value={currentItem?.name}
                 onChange={(e) =>
                   setCurrentItem({ ...currentItem, name: e.target.value })
                 }
@@ -69,7 +69,7 @@ const EditForm = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
                 type="text"
                 name="itemArea"
                 id="itemArea"
-                value={currentItem.itemArea}
+                value={currentItem?.itemArea}
                 onChange={(e) =>
                   setCurrentItem({ ...currentItem, itemArea: e.target.value })
                 }
@@ -95,7 +95,7 @@ const EditForm = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
                 type="text"
                 name="itemLevel"
                 id="itemLevel"
-                value={currentItem.itemLevel}
+                value={currentItem?.itemLevel}
                 onChange={(e) =>
                   setCurrentItem({ ...currentItem, itemLevel: e.target.value })
                 }
@@ -122,7 +122,7 @@ const EditForm = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
                 type="number"
                 name="boxNum"
                 id="boxNum"
-                value={currentItem.boxNumber}
+                value={currentItem?.boxNumber}
                 onChange={(e) =>
                   setCurrentItem({ ...currentItem, boxNumber: e.target.value })
                 }

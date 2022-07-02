@@ -5,7 +5,7 @@ import RocketLoading from '../components/RocketLoading';
 import useSWR, { mutate } from 'swr';
 import Layout from '../components/layout';
 import auth0 from '../lib/auth0';
-import { downeyGarage } from './locations';
+import { downeyGarage } from '../util/locations';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
