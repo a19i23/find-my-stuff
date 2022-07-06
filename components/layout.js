@@ -19,7 +19,7 @@ function Layout({ user, loading = false, children }) {
 
       <Header user={user} loading={loading} />
 
-      <main className="bg-white dark:bg-gray-900 flex flex-col h-full">
+      <main className="bg-white dark:bg-gray-900 h-full overflow-y-auto">
         <div className="max-w-2xl py-12 mx-auto">{children}</div>
       </main>
 

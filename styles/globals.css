@@ -28,9 +28,11 @@
 @layer components {
   #__next {
     @apply h-full;
+    @apply w-auto;
   }
   html,
   body {
     @apply h-full;
+    @apply w-auto;
   }
 }

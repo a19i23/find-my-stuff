@@ -26,7 +26,7 @@ export default function Items({ items, user }) {
   return (
     <Layout user={user}>
       <div className="bg-white dark:bg-gray-900">
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center mx-4 md:mx-0">
           <div className="overflow-x-scroll scrollbar">
             <div className="align-middle inline-block min-w-full ">
               <div className="flex flex-col items-start">

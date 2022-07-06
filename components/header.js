@@ -5,24 +5,9 @@ function Header({ user, loading }) {
     <header>
       <nav>
         <ul>
-          {/* <li>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li> */}
-          {/* <li>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </li> */}
           {!loading &&
             (user ? (
               <>
-                {/* <li>
-                  <Link href="/profile">
-                    <a>Client-rendered profile</a>
-                  </Link>
-                </li> */}
                 <li>
                   <Link href="/items">
                     <a>Items</a>
@@ -63,6 +48,7 @@ function Header({ user, loading }) {
         }
         li {
           margin-right: 1rem;
+          margin-left: 1rem;
         }
         li:nth-child(2) {
           margin-right: auto;
