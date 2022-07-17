@@ -11,7 +11,8 @@ export const cudahyLocations = [
 export const downeyGarage = {
   areas: ['Left (East)', 'Back (South)', 'Right (West)'],
   levels: [
-    'Level 4 (Top)',
+    'Level 5 (Upper)',
+    'Level 4 (Middle Top)',
     'Level 3 (Middle)',
     'Level 2 (Bottom)',
     'Level 1 (Floor)',
