@@ -11,11 +11,10 @@ export default function Items({ items, user }) {
   const [tableItems, setTableItems] = useState();
 
   useEffect(() => {
+    console.log(items);
     if (search) {
-      const filteredItems = items?.filter(
-        (item) =>
-          item.name.toLowerCase().includes(search.toLowerCase()) ||
-          item.location.toLowerCase().includes(search.toLowerCase()),
+      const filteredItems = items?.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()),
       );
       setTableItems(filteredItems);
     } else {
