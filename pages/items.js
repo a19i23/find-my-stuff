@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { connectToDatabase } from '../util/mongodb';
 import moment from 'moment';
 import Paper from '@mui/material/Paper';
 import Layout from '../components/layout';
 import auth0 from '../lib/auth0';
 import Link from 'next/link';
+import CustomizedSnackbar from '../components/CustomizedSnackbar';
 
-export default function Items({ items, user }) {
+const Items = ({ items, user }) => {
+  const router = useRouter();
   const [search, setSearch] = useState('');
   const [tableItems, setTableItems] = useState();
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    severity: '',
+    message: '',
+  });
 
   useEffect(() => {
-    console.log(items);
     if (search) {
       const filteredItems = items?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()),
@@ -21,6 +28,17 @@ export default function Items({ items, user }) {
       setTableItems(items);
     }
   }, [items, search]);
+
+  useEffect(() => {
+    const { itemDeleted } = router.query;
+    if (itemDeleted) {
+      setSnackbar({
+        open: true,
+        severity: 'success',
+        message: `${itemDeleted} was deleted`,
+      });
+    }
+  }, [router]);
 
   return (
     <Layout user={user}>
@@ -148,9 +166,12 @@ export default function Items({ items, user }) {
           </div>
         </div>
       </div>
+      <CustomizedSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
     </Layout>
   );
-}
+};
+
+export default Items;
 
 export async function getServerSideProps({ req, res }) {
   // Here you can check authentication status directly before rendering the page,
