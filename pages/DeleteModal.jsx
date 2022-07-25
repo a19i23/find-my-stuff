@@ -28,7 +28,7 @@ const DeleteModal = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
     const data = await response.json();
     let severity, message;
     if (data) {
-      Router.push({ pathname: '/', query: { itemDeleted: item.name } });
+      Router.push({ pathname: '/', query: { itemDeleted: item?.name } });
       setOpen(false);
       // severity = 'success';
       // message = `item updated`;
