@@ -5,10 +5,12 @@ import Layout from '../../components/layout';
 import RocketLoading from '../../components/RocketLoading';
 import auth0 from '../../lib/auth0';
 import { connectToDatabase } from '../../util/mongodb';
+import DeleteModal from '../DeleteModal';
 import EditModal from './EditModal';
 
 const Item = ({ item, user }) => {
-  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [openRocket, setOpenRocket] = useState(false);
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -19,7 +21,7 @@ const Item = ({ item, user }) => {
   return (
     <Layout user={user}>
       <div className="flex justify-center bg-white dark:bg-gray-900 ">
-        <div className="flex justify-center" style={{ height: '50vh' }}>
+        <div className="flex justify-center" style={{ height: '40vh' }}>
           <div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white dark:bg-gray-700 shadow-lg">
             {/* <img
               className=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
@@ -27,7 +29,7 @@ const Item = ({ item, user }) => {
               alt=""
             /> */}
             <div className="flex flex-col justify-center">
-              <div className="p-6 grid grid-cols-6 gap-6">
+              <div className="p-6 grid grid-cols-6 gap-x-2 gap-y-6">
                 <div className="col-span-6 sm:col-span-6">
                   <label
                     htmlFor="itemName"
@@ -87,26 +89,43 @@ const Item = ({ item, user }) => {
                     {item.boxNumber}
                   </label>
                 </div>
-                <div className="col-span-2 col-start-6 mt-6">
+                <div className="col-span-1 col-start-5 mt-4">
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpenEdit(true)}
                     type="button"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full"
                   >
                     Edit
                   </button>
-                  {open && (
-                    <EditModal
-                      item={item}
-                      setOpen={setOpen}
-                      setOpenRocket={setOpenRocket}
-                      setSnackbar={setSnackbar}
-                    />
-                  )}
+                </div>
+                <div className="col-span-1 col-start-6 mt-4">
+                  <button
+                    onClick={() => setOpenDelete(true)}
+                    type="button"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+          {openEdit && (
+            <EditModal
+              item={item}
+              setOpen={setOpenEdit}
+              setOpenRocket={setOpenRocket}
+              setSnackbar={setSnackbar}
+            />
+          )}
+          {openDelete && (
+            <DeleteModal
+              item={item}
+              setOpen={setOpenDelete}
+              setOpenRocket={setOpenRocket}
+              setSnackbar={setSnackbar}
+            />
+          )}
         </div>
         <RocketLoading open={openRocket} />
         <CustomizedSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
