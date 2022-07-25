@@ -5,7 +5,7 @@ import Router from 'next/router';
 
 const DeleteModal = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
   const ref = useRef();
-  const confirmDeleteMessage = `Are you sure you want to delete "${item.name}"?`;
+  const confirmDeleteMessage = `Are you sure you want to delete "${item?.name}"?`;
 
   useEffect(() => {
     function handleClick(event) {
@@ -30,8 +30,6 @@ const DeleteModal = ({ item, setOpen, setOpenRocket, setSnackbar }) => {
     if (data) {
       Router.push({ pathname: '/', query: { itemDeleted: item?.name } });
       setOpen(false);
-      // severity = 'success';
-      // message = `item updated`;
     } else {
       severity = 'error';
       message = `item not updated`;
