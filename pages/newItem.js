@@ -81,7 +81,7 @@ export default function NewItem({ user }) {
       message = `${dataNames} added to inventory`;
     } else {
       severity = 'error';
-      message = `${data.name} not added. ${data.message}`;
+      message = `Item not added. ${data.message}`;
     }
     setSnackbar((prev) => {
       return {
