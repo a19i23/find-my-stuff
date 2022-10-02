@@ -59,6 +59,12 @@ export default function NewItem({ user }) {
       },
     });
     const data = await response.json();
+    const dataNames = data.reduce((prev, curr) => {
+      if (prev) {
+        return `${prev}, ${curr.name}`;
+      }
+      return curr.name;
+    }, '');
     await delay(2000);
 
     let severity, message;
@@ -72,7 +78,7 @@ export default function NewItem({ user }) {
 
       setOpen(false);
       severity = 'success';
-      message = `${data.name} added to inventory`;
+      message = `${dataNames} added to inventory`;
     } else {
       severity = 'error';
       message = `${data.name} not added. ${data.message}`;

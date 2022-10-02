@@ -3,10 +3,17 @@ import { connectToDatabase } from '../../util/mongodb';
 const newItem = async (req, res) => {
   const { db } = await connectToDatabase();
   const body = req.body;
-  let item = {};
+  const items = body.name.split(',').map((n) => n.trim());
+
+  const bodyItems = [];
+
+  items.forEach((item, i) => {
+    bodyItems.push({ ...body, name: items[i] });
+  });
+
   try {
-    item = await db.collection('items').insertOne(body);
-    res.send(body);
+    await db.collection('items').insertMany(bodyItems);
+    res.send(bodyItems);
   } catch (err) {
     res.send(err);
   }
