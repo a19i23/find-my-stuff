@@ -79,7 +79,7 @@ const Box = ({ items, user }) => {
                   Edit
                 </button>
               </div> */}
-              <div className="col-span-1 col-start-6 mt-4">
+              {/* <div className="col-span-1 col-start-6 mt-4">
                 <button
                   onClick={() => setOpenDelete(true)}
                   type="button"
@@ -87,7 +87,7 @@ const Box = ({ items, user }) => {
                 >
                   Delete
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
