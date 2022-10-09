@@ -11,6 +11,7 @@ const AddItemModal = ({
 }) => {
   const [itemName, setItemName] = React.useState();
   const { itemArea = '', itemLevel = '', boxNumber } = data;
+  console.log(data);
 
   const ref = useRef();
 
@@ -27,8 +28,8 @@ const AddItemModal = ({
   async function handleSubmit() {
     const item = {
       name: itemName,
-      itemArea: itemArea,
-      itemLevel: itemLevel,
+      itemArea,
+      itemLevel,
       boxNumber: parseInt(boxNumber),
       lastUpdated: new Date(),
     };
