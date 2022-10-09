@@ -1,14 +1,31 @@
+import React, { useState } from 'react';
 import { connectToDatabase } from '../../util/mongodb';
 import auth0 from '../../lib/auth0';
 import EditModal from '../item/EditModal';
 import DeleteModal from '../DeleteModal';
 import Layout from '../../components/layout';
 import BoxTable from '../../components/BoxTable';
+import AddItemModal from './AddItemModal';
+import RocketLoading from '../../components/RocketLoading';
+import CustomizedSnackbar from '../../components/CustomizedSnackbar';
+import { useRouter } from 'next/router';
 
 const Box = ({ items, user }) => {
-  console.log(items[0]);
-  console.log(items);
   const { boxNumber, itemArea, itemLevel } = items[0];
+  const [openAdd, setOpenAdd] = useState();
+  const [openRocket, setOpenRocket] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    severity: '',
+    message: '',
+  });
+
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   return (
     <Layout user={user}>
       {/* <div className="flex justify-center bg-white dark:bg-gray-900 "> */}
@@ -67,7 +84,11 @@ const Box = ({ items, user }) => {
               </div>
 
               <div className=" col-span-6">
-                <BoxTable headers={['Name']} data={items} />
+                <BoxTable
+                  headers={['Name']}
+                  data={items}
+                  setOpenAdd={setOpenAdd}
+                />
               </div>
 
               {/* <div className="col-span-1 col-start-5 mt-4">
@@ -91,25 +112,26 @@ const Box = ({ items, user }) => {
             </div>
           </div>
         </div>
-        {/* {openEdit && (
-            <EditModal
-              item={item}
-              setOpen={setOpenEdit}
-              setOpenRocket={setOpenRocket}
-              setSnackbar={setSnackbar}
-            />
-          )}
-          {openDelete && (
-            <DeleteModal
-              item={item}
-              setOpen={setOpenDelete}
-              setOpenRocket={setOpenRocket}
-              setSnackbar={setSnackbar}
-            />
-          )} */}
+        {openAdd && (
+          <AddItemModal
+            setOpen={setOpenAdd}
+            setLoading={setOpenRocket}
+            data={{ boxNumber, itemArea, itemLevel }}
+            setSnackbar={setSnackbar}
+            refreshData={refreshData}
+          />
+        )}
+        {/* {openDelete && (
+          <DeleteModal
+            item={item}
+            setOpen={setOpenDelete}
+            setOpenRocket={setOpenRocket}
+            setSnackbar={setSnackbar}
+          />
+        )} */}
       </div>
-      {/* <RocketLoading open={openRocket} /> */}
-      {/* <CustomizedSnackbar snackbar={snackbar} setSnackbar={setSnackbar} /> */}
+      <RocketLoading open={openRocket} />
+      <CustomizedSnackbar snackbar={snackbar} setSnackbar={setSnackbar} />
       {/* </div> */}
     </Layout>
   );

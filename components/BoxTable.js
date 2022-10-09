@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const BoxTable = ({ data, headers }) => {
+const BoxTable = ({ data, headers, setOpenAdd }) => {
   const getRows = () => {
     const dataRows = [];
     const rows = [];
@@ -23,7 +23,10 @@ const BoxTable = ({ data, headers }) => {
     });
 
     rows.push(
-      <div className="flex flex-col overflow-y-auto scrollbar2 h-36">
+      <div
+        key={uuidv4()}
+        className="flex flex-col overflow-y-auto scrollbar2 h-36"
+      >
         {dataRows}
       </div>,
     );
@@ -39,7 +42,7 @@ const BoxTable = ({ data, headers }) => {
         >
           <div className="col-span-1 col-start-5">
             <button
-              onClick={() => setOpenEdit(true)}
+              onClick={() => setOpenAdd(true)}
               type="button"
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full"
             >
@@ -49,7 +52,7 @@ const BoxTable = ({ data, headers }) => {
         </th>
       </tr>,
     );
-    return rows;
+    return <tbody>{rows}</tbody>;
   };
 
   return (
@@ -66,7 +69,7 @@ const BoxTable = ({ data, headers }) => {
             })}
           </tr>
         </thead>
-        <tbody>{getRows()}</tbody>
+        {getRows()}
       </table>
     </div>
   );
