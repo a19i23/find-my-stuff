@@ -23,6 +23,25 @@
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgb(177, 157, 242);
   }
+
+  .scrollbar2::-webkit-scrollbar {
+    width: 12px;
+    height: 10px;
+  }
+
+  .scrollbar2::-webkit-scrollbar-track {
+    background: rgb(31, 41, 55);
+  }
+
+  .scrollbar2::-webkit-scrollbar-thumb {
+    background: rgb(229 231 235);
+    border-radius: 100vh;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .scrollbar2::-webkit-scrollbar-thumb:hover {
+    background: rgb(177, 157, 242);
+  }
 }
 
 @layer components {

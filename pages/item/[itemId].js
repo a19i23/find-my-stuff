@@ -159,8 +159,6 @@ export async function getServerSideProps({ req, res, params }) {
     .find(ObjectId(params.itemId))
     .next();
 
-  console.log('item', item);
-
   return {
     props: {
       item: JSON.parse(JSON.stringify(item)),
