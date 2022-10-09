@@ -10,7 +10,7 @@ const AddItemModal = ({
   refreshData,
 }) => {
   const [itemName, setItemName] = React.useState();
-  const { itemArea, itemLevel, boxNumber } = data;
+  const { itemArea = '', itemLevel = '', boxNumber } = data;
 
   const ref = useRef();
 
