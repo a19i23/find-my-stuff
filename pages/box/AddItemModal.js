@@ -12,6 +12,8 @@ const AddItemModal = ({
   const [itemName, setItemName] = React.useState();
   const ref = useRef();
 
+  const { boxNumber, itemArea, itemLevel } = data || {};
+
   useEffect(() => {
     function handleClick(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -25,12 +27,11 @@ const AddItemModal = ({
   async function handleSubmit() {
     const item = {
       name: itemName,
-      boxNumber: parseInt(data?.boxNumber),
+      boxNumber,
+      itemArea,
+      itemLevel,
       lastUpdated: new Date(),
     };
-
-    if (data?.itemArea) item.itemArea = itemArea;
-    if (data?.itemLevel) item.itemLevel = itemLevel;
 
     setLoading(true);
     const response = await fetch('/api/newItem', {
@@ -120,7 +121,7 @@ const AddItemModal = ({
                     className="text-lg leading-6 font-medium text-gray-700 dark:text-gray-200"
                     id="modal-title"
                   >
-                    {`Add item to box #${data?.boxNumber}`}
+                    {`Add item to box #${boxNumber}`}
                   </h3>
                   <div className="px-4 py-5 bg-white dark:bg-gray-700 sm:p-6">
                     <label
