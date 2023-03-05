@@ -112,9 +112,9 @@ const Items = ({ items, user }) => {
                           >
                             <td className="px-6">
                               <div className="flex items-center">
-                                <div className="whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200">
+                                <div className="whitespace-pre-wrap text-sm font-medium text-gray-900 dark:text-gray-200 underline">
                                   <Link href={`/item/${item._id}`}>
-                                    <a className="hover:underline">
+                                    <a className="hover:text-violet-500">
                                       {item.name}
                                     </a>
                                   </Link>
@@ -132,9 +132,9 @@ const Items = ({ items, user }) => {
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900 dark:text-gray-400">
+                              <div className="text-sm text-gray-900 dark:text-gray-400 underline">
                                 <Link href={`/box/${item.boxNumber}`}>
-                                  <a className="hover:underline">
+                                  <a className="hover:text-violet-500">
                                     {item.boxNumber}
                                   </a>
                                 </Link>
