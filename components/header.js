@@ -9,14 +9,10 @@ function Header({ user, loading }) {
             (user ? (
               <>
                 <li>
-                  <Link href="/items">
-                    <a>Items</a>
-                  </Link>
+                  <Link href="/items">Items</Link>
                 </li>
                 <li>
-                  <Link href="/newItem">
-                    <a>Create</a>
-                  </Link>
+                  <Link href="/newItem">Create</Link>
                 </li>
                 <li>
                   <Link href="/api/logout">Logout</Link>
