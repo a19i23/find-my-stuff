@@ -17,6 +17,7 @@
 
 # misc
 .DS_Store
+.cache_ggshield
 
 # debug
 npm-debug.log*
